@@ -294,7 +294,957 @@ var ADMIN_PASS = 'calcesur2026';
 var isAdmin = false;
 
 var modulesData = {
-  'mod-1': {title:'Gestión de Riesgos y Evaluación',label:'Módulo 1',emoji:'⚠️',docs:{'iperc-linea':{name:'IPERC Línea Base',icon:'ri-file-text-line',desc:'Identificación de peligros y evaluación de riesgos de línea base.'},'iperc-continuo':{name:'IPERC Continuo',icon:'ri-file-text-line',desc:'Evaluación de riesgos continua antes de cada actividad.'},'matriz-eia':{name:'Matriz EIA',icon:'ri-file-text-line',desc:'Matriz de Evaluación de Impacto Ambiental.'},'mapa-riesgos':{name:'Mapa de Riesgos',icon:'ri-map-pin-line',desc:'Identificación georreferenciada de zonas de riesgo.'}}},
+  'mod-1': {title:'Gestión de Riesgos y Evaluación',label:'Módulo 1',emoji:'⚠️',docs:{'iperc-linea':{name:'IPERC Línea Base',icon:'ri-file-text-line',desc:'Identificación de peligros y evaluación de riesgos de línea base.'},'iperc-continuo':{name:'IPERC Continuo',icon:'ri-file-text-line',desc:'Evaluación de riesgos continua antes de cada actividad.'},'matriz-eia':{name:'Matriz EIA',icon:'ri-file-text-line',desc:'Matriz de Evaluación de Impacto Ambiental.',url:<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Materias Primas - CALCESUR</title>
+<meta name="description" content="Portal Centralizado de PETS y Estándares de CALCESUR - Materias Primas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+<style>
+:root{--green:#00c814;--green-lt:rgba(0,200,20,.12);--green-border:rgba(0,200,20,.35);--dark-green:#0a3a2a;--bg:#f4f6f9;--white:#ffffff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--card:#ffffff;--destructive:#dc3545;--radius:14px}
+*{font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+.d-none{display:none!important}
+
+/* NAVBAR */
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-img{height:52px;width:auto;object-fit:contain}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
+.nav-links a{font-size:.875rem;font-weight:700;color:var(--dark-green);text-transform:uppercase;letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.btn-admin{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:.75rem;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.btn-admin:hover{color:var(--green);border-color:var(--green-border);background:var(--green-lt)}
+.btn-admin.active{background:var(--green-lt);color:var(--green);border-color:var(--green-border)}
+
+/* HERO */
+header{position:relative;overflow:hidden;background:var(--dark-green);padding:96px 20px;text-align:center;color:var(--white)}
+header .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+header .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--dark-green) 0%,transparent 60%)}
+header .hero-content{position:relative;z-index:2;max-width:820px;margin:0 auto}
+.badge{display:inline-block;padding:6px 18px;border-radius:999px;background:rgba(0,200,20,.18);border:1px solid var(--green-border);color:var(--green);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+header h1{font-size:clamp(2.4rem,6vw,4.5rem);font-weight:900;letter-spacing:-.02em;color:var(--white);text-transform:uppercase;line-height:1.05;margin-bottom:20px}
+header h1 span{color:var(--green)}
+header p{font-size:1.1rem;color:#cbd5e1;max-width:600px;margin:0 auto}
+
+/* STATS */
+.stats-bar{background:var(--white);border-bottom:1px solid var(--border);padding:24px 5%}
+.stats-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-item{text-align:center;padding:0 12px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:2rem;font-weight:900;color:var(--green);line-height:1}
+.stat-label{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;position:relative}
+.admin-indicator{display:inline-block;background:var(--green-lt);color:var(--green);padding:2px 8px;border-radius:20px;font-size:.6rem;font-weight:800;border:1px solid var(--green-border);margin-left:6px;vertical-align:middle}
+
+/* SECTIONS */
+.section-modules{padding:80px 5%;max-width:1280px;margin:0 auto;width:100%;flex:1}
+.section-title{text-align:center;color:var(--dark-green);font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;margin-bottom:12px}
+.section-divider{width:80px;height:5px;background:var(--green);border-radius:999px;margin:0 auto 16px}
+.section-subtitle{text-align:center;color:var(--muted);font-size:1rem;max-width:560px;margin:0 auto 56px}
+
+/* MODULE CARDS */
+.grid-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.module-card{background:var(--card);border-radius:var(--radius);padding:28px;border:1px solid var(--border);border-top:4px solid var(--green);box-shadow:0 4px 20px rgba(0,0,0,.05);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+.module-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,200,20,.12)}
+.module-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
+.module-icon{width:48px;height:48px;border-radius:12px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--green);margin-bottom:14px}
+.module-card h3{font-size:1.1rem;font-weight:800;color:var(--dark-green);line-height:1.35;margin:0}
+.arrow-icon{color:var(--muted);font-size:1.1rem;flex-shrink:0;margin-top:2px;transition:color .2s}
+.module-card:hover .arrow-icon{color:var(--green)}
+.doc-list{list-style:none;display:flex;flex-direction:column;gap:6px;flex:1}
+.doc-item{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;cursor:pointer;transition:background .2s}
+.doc-item:hover{background:var(--green-lt)}
+.doc-item:hover .doc-text{color:var(--green)}
+.doc-icon{font-size:1.1rem;flex-shrink:0;color:var(--green)}
+.doc-text{font-size:.875rem;font-weight:600;color:#475569;flex:1;line-height:1.35;transition:color .2s}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.ver-modulo{font-size:.75rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.doc-count{font-size:.7rem;font-weight:700;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:20px}
+
+/* MODULE DETAIL */
+.module-header{background:var(--dark-green);color:var(--white);padding:48px 5%;position:relative;overflow:hidden}
+.module-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(0,200,20,.15),transparent 60%)}
+.module-header-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:rgba(255,255,255,.65);margin-bottom:16px;transition:color .2s;cursor:pointer}
+.back-link:hover{color:#fff}
+.module-title-row{display:flex;align-items:center;gap:18px}
+.module-emoji{font-size:2.6rem}
+.module-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55);font-weight:800;margin-bottom:4px}
+.module-page-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#fff;line-height:1.2;margin:0}
+.detail-layout{max-width:960px;margin:0 auto;padding:40px 5%;display:grid;grid-template-columns:280px 1fr;gap:32px}
+.sidebar-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:24px;position:sticky;top:88px;align-self:start}
+.sidebar-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:16px}
+.sidebar-doc{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;margin-bottom:4px;font-size:.85rem;font-weight:600;color:#475569;transition:all .2s}
+.sidebar-doc:hover,.sidebar-doc.active{background:var(--green-lt);color:var(--green)}
+.content-area{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:32px}
+.content-area h3{font-size:1.3rem;font-weight:800;color:var(--dark-green);margin-bottom:8px}
+.content-area .content-desc{color:var(--muted);font-size:.9rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+
+/* UPLOAD ZONE */
+.upload-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:32px 24px;border:2px dashed var(--green-border);border-radius:var(--radius);background:var(--green-lt);cursor:pointer;transition:all .25s;text-align:center;margin-bottom:20px}
+.upload-zone:hover{border-color:var(--green);background:rgba(0,200,20,.08)}
+.upload-icon-wrap{width:56px;height:56px;border-radius:50%;background:rgba(0,200,20,.15);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--green)}
+.upload-title{font-size:.95rem;font-weight:800;color:var(--text)}
+.upload-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+/* FILES */
+.file-row{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border);transition:box-shadow .2s;margin-bottom:10px}
+.file-row:hover{box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.file-icon-box{width:46px;height:46px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--green);flex-shrink:0;border:1px solid var(--border)}
+.file-info{flex:1;min-width:0}
+.file-name{font-size:.9rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-meta{font-size:.75rem;color:var(--muted);margin-top:2px}
+.file-actions{display:flex;gap:6px;align-items:center}
+.btn-view{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--green-border);border-radius:8px;font-size:.78rem;font-weight:700;color:var(--green);background:transparent;cursor:pointer;transition:all .2s}
+.btn-view:hover{background:var(--green);color:#fff}
+.btn-delete{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--muted);font-size:1rem;transition:all .2s}
+.btn-delete:hover{color:var(--destructive);background:rgba(220,53,69,.08)}
+
+/* NOTICES */
+.access-notice{padding:14px 16px;border-radius:10px;text-align:center;font-size:.85rem;margin-bottom:20px}
+.access-notice.public{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;color:#1e40af}
+.access-notice.admin{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;color:#166534}
+.access-notice i{font-size:1.1rem;margin-right:6px;vertical-align:middle}
+.access-notice strong{color:inherit;font-weight:800}
+
+/* FEATURES */
+.features-section{background:var(--white);padding:72px 5%;border-top:1px solid var(--border)}
+.features-inner{max-width:1280px;margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.feature-card{text-align:center;padding:24px}
+.feature-icon{width:64px;height:64px;border-radius:16px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--green);margin:0 auto 16px}
+.feature-card h4{font-size:1.05rem;font-weight:800;color:var(--dark-green);margin-bottom:8px}
+.feature-card p{font-size:.875rem;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+footer{background:var(--dark-green);color:var(--white);padding:48px 5% 24px;margin-top:auto}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-brand img{height:44px;margin-bottom:14px;filter:brightness(0) invert(1);opacity:.9}
+.footer-brand p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6}
+.footer-col h5{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{font-size:.875rem;color:rgba(255,255,255,.75);transition:color .2s}
+.footer-col a:hover{color:var(--green)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:.78rem;color:rgba(255,255,255,.45)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;justify-content:center;align-items:center;z-index:1000;backdrop-filter:blur(4px)}
+.modal-content{background:#fff;padding:32px;border-radius:16px;width:90%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-icon{width:60px;height:60px;border-radius:50%;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--green);margin:0 auto 14px}
+.modal-content h3{color:var(--dark-green);margin-bottom:6px;font-size:1.15rem;font-weight:800}
+.modal-content p{color:var(--muted);font-size:.82rem;margin-bottom:18px}
+.modal-content .input-wrap{position:relative;margin-bottom:10px}
+.modal-content .input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem}
+.modal-content input{width:100%;padding:12px 12px 12px 40px;border:2px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s}
+.modal-content input:focus{border-color:var(--green)}
+.modal-error{color:var(--destructive);font-size:.78rem;font-weight:600;margin-bottom:10px;min-height:18px}
+.modal-content button{width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.9rem;margin-bottom:6px;transition:opacity .2s}
+.modal-content button:hover{opacity:.9}
+.modal-content button.cancel{background:transparent;color:var(--muted);border:1px solid var(--border)}
+
+/* TOAST */
+.toast{position:fixed;top:88px;right:24px;background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;font-size:.85rem;z-index:3000;box-shadow:0 8px 24px rgba(0,200,20,.3);animation:slideIn .3s ease}
+.toast.error{background:var(--destructive);box-shadow:0 8px 24px rgba(220,53,69,.3)}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .features-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .detail-layout{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:500px){
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" class="logo-img" onerror="this.style.display='none'">
+    <ul class="nav-links">
+      <li><a href="#" onclick="showHome();return false">Módulos</a></li>
+      <li><a href="#caracteristicas" onclick="scrollToFeatures();return false">Características</a></li>
+      <li>
+        <button class="btn-admin" id="btn-admin-login" onclick="openAdminLogin()">
+          <i class="ri-lock-line"></i> Administrar
+        </button>
+      </li>
+    </ul>
+    <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" class="logo-img" onerror="this.style.display='none'">
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="view-home">
+  <header>
+    <img class="hero-bg" src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/348a3d1f827c4eef8410fd2cf2b86eaf.jpeg~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=wSrcw0PnciqEFR6Qr8alTj2yvB4%3D" alt="" onerror="this.style.display='none'">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">Portal Centralizado</div>
+      <h1><span>MATERIAS</span> PRIMAS</h1>
+      <p>PORTAL CENTRALIZADO DE PETS, ESTÁNDARES</p>
+    </div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Módulos</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-docs">0</div><div class="stat-label">Archivos<span id="admin-badge" class="d-none admin-indicator">ADMIN</span></div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Acceso Público</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Estandarizado</div></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="section-modules">
+      <h2 class="section-title">Documentación y Herramientas</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Accede públicamente a los PETS, formatos y estándares organizados por módulos.</p>
+      <div class="grid-modules" id="modules-grid"></div>
+    </section>
+
+    <section class="features-section" id="caracteristicas">
+      <div class="features-inner">
+        <h2 class="section-title">Características del Portal</h2>
+        <div class="section-divider"></div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><i class="ri-earth-line"></i></div><h4>Acceso Público</h4><p>Toda la documentación disponible para consulta sin necesidad de registro.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ri-admin-line"></i></div><h4>Gestión Administrativa</h4><p>Solo el administrador autorizado puede subir, actualizar y eliminar archivos.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ri-shield-check-line"></i></div><h4>Seguridad y Control</h4><p>Usuarios visualizan contenido; administrador gestiona la biblioteca documental.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MODULE DETAIL -->
+<div id="view-module" class="d-none">
+  <div class="module-header">
+    <div class="module-header-inner">
+      <span class="back-link" onclick="showHome()"><i class="ri-arrow-left-line"></i> Volver al inicio</span>
+      <div class="module-title-row">
+        <span class="module-emoji" id="ui-mod-emoji">⚠️</span>
+        <div>
+          <p class="module-label" id="ui-mod-label">Módulo 1</p>
+          <h2 class="module-page-title" id="ui-mod-title">Gestión de Riesgos</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-layout">
+    <aside><div class="sidebar-card"><p class="sidebar-label">Documentos</p><div id="sidebar-docs"></div></div></aside>
+    <div class="content-area">
+      <h3 id="content-title">Selecciona un documento</h3>
+      <p class="content-desc" id="content-desc">Elige un documento del menú lateral.</p>
+      <div id="upload-zone" class="d-none">
+        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon-wrap"><i class="ri-upload-cloud-2-line"></i></div>
+          <div class="upload-title">Subir Archivo</div>
+          <div class="upload-subtitle">PDF, Word, Excel o imagen</div>
+          <input type="file" id="file-input" style="display:none" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" onchange="handleFileUpload(event)">
+        </div>
+      </div>
+      <div id="access-notice" class="access-notice public">
+        <i class="ri-eye-line"></i><strong>Modo Público:</strong> Todos los usuarios pueden visualizar los archivos. Si eres administrador, inicia sesión para gestionar documentos.
+      </div>
+      <div id="files-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" style="height:44px" onerror="this.style.display='none'">
+        <p>Portal Centralizado de PETS y Estándares de CALCESUR. Documentación de seguridad operativa de Materias Primas.</p>
+      </div>
+      <div class="footer-col"><h5>Módulos</h5><ul><li><a href="#" onclick="showHome();return false">Gestión de Riesgos</a></li><li><a href="#" onclick="showHome();return false">Estándares y PETS</a></li><li><a href="#" onclick="showHome();return false">Materiales Peligrosos</a></li><li><a href="#" onclick="showHome();return false">Emergencias</a></li></ul></div>
+      <div class="footer-col"><h5>Enlaces</h5><ul><li><a href="#">Intranet CALCESUR</a></li><li><a href="#">Contacto</a></li></ul></div>
+      <div class="footer-col"><h5>Soporte</h5><ul><li><a href="#">Ayuda</a></li><li><a href="#">Reportar Problema</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2026 CALCESUR — Materias Primas. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+// ============= CONFIGURACIÓN ADMIN =============
+var ADMIN_USER = 'admin';
+var ADMIN_PASS = 'calcesur2026';
+var isAdmin = false;
+
+var modulesData = {
+  'mod-1': {title:'Gestión de Riesgos y Evaluación',label:'Módulo 1',emoji:'⚠️',docs:{'iperc-linea':{name:'IPERC Línea Base',icon:'ri-file-text-line',desc:'Identificación de peligros y evaluación de riesgos de línea base.'},'iperc-continuo':{name:'IPERC Continuo',icon:'ri-file-text-line',desc:'Evaluación de riesgos continua antes de cada actividad.'},'matriz-eia':{name:'Matriz EIA',icon:'ri-file-text-line',desc:'Matriz de Evaluación de Impacto Ambiental.',url: <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Materias Primas - CALCESUR</title>
+<meta name="description" content="Portal Centralizado de PETS y Estándares de CALCESUR - Materias Primas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+<style>
+:root{--green:#00c814;--green-lt:rgba(0,200,20,.12);--green-border:rgba(0,200,20,.35);--dark-green:#0a3a2a;--bg:#f4f6f9;--white:#ffffff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--card:#ffffff;--destructive:#dc3545;--radius:14px}
+*{font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+.d-none{display:none!important}
+
+/* NAVBAR */
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-img{height:52px;width:auto;object-fit:contain}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
+.nav-links a{font-size:.875rem;font-weight:700;color:var(--dark-green);text-transform:uppercase;letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.btn-admin{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:.75rem;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.btn-admin:hover{color:var(--green);border-color:var(--green-border);background:var(--green-lt)}
+.btn-admin.active{background:var(--green-lt);color:var(--green);border-color:var(--green-border)}
+
+/* HERO */
+header{position:relative;overflow:hidden;background:var(--dark-green);padding:96px 20px;text-align:center;color:var(--white)}
+header .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+header .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--dark-green) 0%,transparent 60%)}
+header .hero-content{position:relative;z-index:2;max-width:820px;margin:0 auto}
+.badge{display:inline-block;padding:6px 18px;border-radius:999px;background:rgba(0,200,20,.18);border:1px solid var(--green-border);color:var(--green);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+header h1{font-size:clamp(2.4rem,6vw,4.5rem);font-weight:900;letter-spacing:-.02em;color:var(--white);text-transform:uppercase;line-height:1.05;margin-bottom:20px}
+header h1 span{color:var(--green)}
+header p{font-size:1.1rem;color:#cbd5e1;max-width:600px;margin:0 auto}
+
+/* STATS */
+.stats-bar{background:var(--white);border-bottom:1px solid var(--border);padding:24px 5%}
+.stats-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-item{text-align:center;padding:0 12px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:2rem;font-weight:900;color:var(--green);line-height:1}
+.stat-label{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;position:relative}
+.admin-indicator{display:inline-block;background:var(--green-lt);color:var(--green);padding:2px 8px;border-radius:20px;font-size:.6rem;font-weight:800;border:1px solid var(--green-border);margin-left:6px;vertical-align:middle}
+
+/* SECTIONS */
+.section-modules{padding:80px 5%;max-width:1280px;margin:0 auto;width:100%;flex:1}
+.section-title{text-align:center;color:var(--dark-green);font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;margin-bottom:12px}
+.section-divider{width:80px;height:5px;background:var(--green);border-radius:999px;margin:0 auto 16px}
+.section-subtitle{text-align:center;color:var(--muted);font-size:1rem;max-width:560px;margin:0 auto 56px}
+
+/* MODULE CARDS */
+.grid-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.module-card{background:var(--card);border-radius:var(--radius);padding:28px;border:1px solid var(--border);border-top:4px solid var(--green);box-shadow:0 4px 20px rgba(0,0,0,.05);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+.module-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,200,20,.12)}
+.module-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
+.module-icon{width:48px;height:48px;border-radius:12px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--green);margin-bottom:14px}
+.module-card h3{font-size:1.1rem;font-weight:800;color:var(--dark-green);line-height:1.35;margin:0}
+.arrow-icon{color:var(--muted);font-size:1.1rem;flex-shrink:0;margin-top:2px;transition:color .2s}
+.module-card:hover .arrow-icon{color:var(--green)}
+.doc-list{list-style:none;display:flex;flex-direction:column;gap:6px;flex:1}
+.doc-item{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;cursor:pointer;transition:background .2s}
+.doc-item:hover{background:var(--green-lt)}
+.doc-item:hover .doc-text{color:var(--green)}
+.doc-icon{font-size:1.1rem;flex-shrink:0;color:var(--green)}
+.doc-text{font-size:.875rem;font-weight:600;color:#475569;flex:1;line-height:1.35;transition:color .2s}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.ver-modulo{font-size:.75rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.doc-count{font-size:.7rem;font-weight:700;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:20px}
+
+/* MODULE DETAIL */
+.module-header{background:var(--dark-green);color:var(--white);padding:48px 5%;position:relative;overflow:hidden}
+.module-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(0,200,20,.15),transparent 60%)}
+.module-header-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:rgba(255,255,255,.65);margin-bottom:16px;transition:color .2s;cursor:pointer}
+.back-link:hover{color:#fff}
+.module-title-row{display:flex;align-items:center;gap:18px}
+.module-emoji{font-size:2.6rem}
+.module-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55);font-weight:800;margin-bottom:4px}
+.module-page-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#fff;line-height:1.2;margin:0}
+.detail-layout{max-width:960px;margin:0 auto;padding:40px 5%;display:grid;grid-template-columns:280px 1fr;gap:32px}
+.sidebar-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:24px;position:sticky;top:88px;align-self:start}
+.sidebar-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:16px}
+.sidebar-doc{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;margin-bottom:4px;font-size:.85rem;font-weight:600;color:#475569;transition:all .2s}
+.sidebar-doc:hover,.sidebar-doc.active{background:var(--green-lt);color:var(--green)}
+.content-area{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:32px}
+.content-area h3{font-size:1.3rem;font-weight:800;color:var(--dark-green);margin-bottom:8px}
+.content-area .content-desc{color:var(--muted);font-size:.9rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+
+/* UPLOAD ZONE */
+.upload-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:32px 24px;border:2px dashed var(--green-border);border-radius:var(--radius);background:var(--green-lt);cursor:pointer;transition:all .25s;text-align:center;margin-bottom:20px}
+.upload-zone:hover{border-color:var(--green);background:rgba(0,200,20,.08)}
+.upload-icon-wrap{width:56px;height:56px;border-radius:50%;background:rgba(0,200,20,.15);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--green)}
+.upload-title{font-size:.95rem;font-weight:800;color:var(--text)}
+.upload-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+/* FILES */
+.file-row{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border);transition:box-shadow .2s;margin-bottom:10px}
+.file-row:hover{box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.file-icon-box{width:46px;height:46px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--green);flex-shrink:0;border:1px solid var(--border)}
+.file-info{flex:1;min-width:0}
+.file-name{font-size:.9rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-meta{font-size:.75rem;color:var(--muted);margin-top:2px}
+.file-actions{display:flex;gap:6px;align-items:center}
+.btn-view{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--green-border);border-radius:8px;font-size:.78rem;font-weight:700;color:var(--green);background:transparent;cursor:pointer;transition:all .2s}
+.btn-view:hover{background:var(--green);color:#fff}
+.btn-delete{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--muted);font-size:1rem;transition:all .2s}
+.btn-delete:hover{color:var(--destructive);background:rgba(220,53,69,.08)}
+
+/* NOTICES */
+.access-notice{padding:14px 16px;border-radius:10px;text-align:center;font-size:.85rem;margin-bottom:20px}
+.access-notice.public{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;color:#1e40af}
+.access-notice.admin{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;color:#166534}
+.access-notice i{font-size:1.1rem;margin-right:6px;vertical-align:middle}
+.access-notice strong{color:inherit;font-weight:800}
+
+/* FEATURES */
+.features-section{background:var(--white);padding:72px 5%;border-top:1px solid var(--border)}
+.features-inner{max-width:1280px;margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.feature-card{text-align:center;padding:24px}
+.feature-icon{width:64px;height:64px;border-radius:16px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--green);margin:0 auto 16px}
+.feature-card h4{font-size:1.05rem;font-weight:800;color:var(--dark-green);margin-bottom:8px}
+.feature-card p{font-size:.875rem;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+footer{background:var(--dark-green);color:var(--white);padding:48px 5% 24px;margin-top:auto}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-brand img{height:44px;margin-bottom:14px;filter:brightness(0) invert(1);opacity:.9}
+.footer-brand p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6}
+.footer-col h5{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{font-size:.875rem;color:rgba(255,255,255,.75);transition:color .2s}
+.footer-col a:hover{color:var(--green)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:.78rem;color:rgba(255,255,255,.45)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;justify-content:center;align-items:center;z-index:1000;backdrop-filter:blur(4px)}
+.modal-content{background:#fff;padding:32px;border-radius:16px;width:90%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-icon{width:60px;height:60px;border-radius:50%;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--green);margin:0 auto 14px}
+.modal-content h3{color:var(--dark-green);margin-bottom:6px;font-size:1.15rem;font-weight:800}
+.modal-content p{color:var(--muted);font-size:.82rem;margin-bottom:18px}
+.modal-content .input-wrap{position:relative;margin-bottom:10px}
+.modal-content .input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem}
+.modal-content input{width:100%;padding:12px 12px 12px 40px;border:2px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s}
+.modal-content input:focus{border-color:var(--green)}
+.modal-error{color:var(--destructive);font-size:.78rem;font-weight:600;margin-bottom:10px;min-height:18px}
+.modal-content button{width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.9rem;margin-bottom:6px;transition:opacity .2s}
+.modal-content button:hover{opacity:.9}
+.modal-content button.cancel{background:transparent;color:var(--muted);border:1px solid var(--border)}
+
+/* TOAST */
+.toast{position:fixed;top:88px;right:24px;background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;font-size:.85rem;z-index:3000;box-shadow:0 8px 24px rgba(0,200,20,.3);animation:slideIn .3s ease}
+.toast.error{background:var(--destructive);box-shadow:0 8px 24px rgba(220,53,69,.3)}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .features-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .detail-layout{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:500px){
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" class="logo-img" onerror="this.style.display='none'">
+    <ul class="nav-links">
+      <li><a href="#" onclick="showHome();return false">Módulos</a></li>
+      <li><a href="#caracteristicas" onclick="scrollToFeatures();return false">Características</a></li>
+      <li>
+        <button class="btn-admin" id="btn-admin-login" onclick="openAdminLogin()">
+          <i class="ri-lock-line"></i> Administrar
+        </button>
+      </li>
+    </ul>
+    <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" class="logo-img" onerror="this.style.display='none'">
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="view-home">
+  <header>
+    <img class="hero-bg" src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/348a3d1f827c4eef8410fd2cf2b86eaf.jpeg~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=wSrcw0PnciqEFR6Qr8alTj2yvB4%3D" alt="" onerror="this.style.display='none'">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">Portal Centralizado</div>
+      <h1><span>MATERIAS</span> PRIMAS</h1>
+      <p>PORTAL CENTRALIZADO DE PETS, ESTÁNDARES</p>
+    </div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Módulos</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-docs">0</div><div class="stat-label">Archivos<span id="admin-badge" class="d-none admin-indicator">ADMIN</span></div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Acceso Público</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Estandarizado</div></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="section-modules">
+      <h2 class="section-title">Documentación y Herramientas</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Accede públicamente a los PETS, formatos y estándares organizados por módulos.</p>
+      <div class="grid-modules" id="modules-grid"></div>
+    </section>
+
+    <section class="features-section" id="caracteristicas">
+      <div class="features-inner">
+        <h2 class="section-title">Características del Portal</h2>
+        <div class="section-divider"></div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><i class="ri-earth-line"></i></div><h4>Acceso Público</h4><p>Toda la documentación disponible para consulta sin necesidad de registro.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ri-admin-line"></i></div><h4>Gestión Administrativa</h4><p>Solo el administrador autorizado puede subir, actualizar y eliminar archivos.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ri-shield-check-line"></i></div><h4>Seguridad y Control</h4><p>Usuarios visualizan contenido; administrador gestiona la biblioteca documental.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MODULE DETAIL -->
+<div id="view-module" class="d-none">
+  <div class="module-header">
+    <div class="module-header-inner">
+      <span class="back-link" onclick="showHome()"><i class="ri-arrow-left-line"></i> Volver al inicio</span>
+      <div class="module-title-row">
+        <span class="module-emoji" id="ui-mod-emoji">⚠️</span>
+        <div>
+          <p class="module-label" id="ui-mod-label">Módulo 1</p>
+          <h2 class="module-page-title" id="ui-mod-title">Gestión de Riesgos</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-layout">
+    <aside><div class="sidebar-card"><p class="sidebar-label">Documentos</p><div id="sidebar-docs"></div></div></aside>
+    <div class="content-area">
+      <h3 id="content-title">Selecciona un documento</h3>
+      <p class="content-desc" id="content-desc">Elige un documento del menú lateral.</p>
+      <div id="upload-zone" class="d-none">
+        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon-wrap"><i class="ri-upload-cloud-2-line"></i></div>
+          <div class="upload-title">Subir Archivo</div>
+          <div class="upload-subtitle">PDF, Word, Excel o imagen</div>
+          <input type="file" id="file-input" style="display:none" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" onchange="handleFileUpload(event)">
+        </div>
+      </div>
+      <div id="access-notice" class="access-notice public">
+        <i class="ri-eye-line"></i><strong>Modo Público:</strong> Todos los usuarios pueden visualizar los archivos. Si eres administrador, inicia sesión para gestionar documentos.
+      </div>
+      <div id="files-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://p16-flow-image-sign.ibyteimg.com/tos-mya-i-uo7y4d541q/29abd050692e43fea97a151458962bf8.png~tplv-0es2k971ck-image.image?rcl=2026090220310290566DCB8C399DEAE657&rk3s=8e244e95&rrcfp=935dee89&x-expires=1788957063&x-signature=fRUe90jbhEz0MDglopRlcFNDcOk%3D" alt="CALCESUR" style="height:44px" onerror="this.style.display='none'">
+        <p>Portal Centralizado de PETS y Estándares de CALCESUR. Documentación de seguridad operativa de Materias Primas.</p>
+      </div>
+      <div class="footer-col"><h5>Módulos</h5><ul><li><a href="#" onclick="showHome();return false">Gestión de Riesgos</a></li><li><a href="#" onclick="showHome();return false">Estándares y PETS</a></li><li><a href="#" onclick="showHome();return false">Materiales Peligrosos</a></li><li><a href="#" onclick="showHome();return false">Emergencias</a></li></ul></div>
+      <div class="footer-col"><h5>Enlaces</h5><ul><li><a href="#">Intranet CALCESUR</a></li><li><a href="#">Contacto</a></li></ul></div>
+      <div class="footer-col"><h5>Soporte</h5><ul><li><a href="#">Ayuda</a></li><li><a href="#">Reportar Problema</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2026 CALCESUR — Materias Primas. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+// ============= CONFIGURACIÓN ADMIN =============
+var ADMIN_USER = 'admin';
+var ADMIN_PASS = 'calcesur2026';
+var isAdmin = false;
+
+var modulesData = {
+  'mod-1': {title:'Gestión de Riesgos y Evaluación',label:'Módulo 1',emoji:'⚠️',docs:{'iperc-linea':{name:'IPERC Línea Base',icon:'ri-file-text-line',desc:'Identificación de peligros y evaluación de riesgos de línea base.'},'iperc-continuo':{name:'IPERC Continuo',icon:'ri-file-text-line',desc:'Evaluación de riesgos continua antes de cada actividad.'},'matriz-eia':{name:'Matriz EIA',icon:'ri-file-text-line',desc:'Matriz de Evaluación de Impacto Ambiental.',url:'https://github.com/Calcesur/materias-primas/blob/main/documentos/DAP%20-%20MIAEIA%20-%20MCO%20-%20MATERIAS%20PRIMAS%20-%202025%202.pdf'},'mapa-riesgos':{name:'Mapa de Riesgos',icon:'ri-map-pin-line',desc:'Identificación georreferenciada de zonas de riesgo.'}}},
+  'mod-2': {title:'Estándares y Procedimientos',label:'Módulo 2',emoji:'📋',docs:{'estandares':{name:'Estándares de Seguridad',icon:'ri-file-list-3-line',desc:'Normativas y estándares mínimos de seguridad industrial.'},'pets':{name:'Procedimientos (PETS)',icon:'ri-file-list-3-line',desc:'Procedimientos Escritos de Trabajo Seguro.'},'petar':{name:'Permisos Alto Riesgo',icon:'ri-shield-keyhole-line',desc:'Permisos para trabajos de alto riesgo.'}}},
+  'mod-3': {title:'Control de Materiales Peligrosos',label:'Módulo 3',emoji:'🧪',docs:{'msds':{name:'Hojas MSDS / FDS',icon:'ri-chemical-glass-line',desc:'Fichas de Datos de Seguridad.'},'incompatibilidad':{name:'Matriz Incompatibilidad',icon:'ri-chemical-glass-line',desc:'Matriz de incompatibilidad de materiales.'}}},
+  'mod-4': {title:'Preparación ante Emergencias',label:'Módulo 4',emoji:'🚨',docs:{'plan':{name:'Plan de Respuesta',icon:'ri-siren-line',desc:'Procedimientos de respuesta ante emergencias.'},'directorio':{name:'Directorio Emergencias',icon:'ri-phone-line',desc:'Contactos y números de emergencia.'}}}
+};
+
+var currentModule = null, currentDoc = null;
+var filesData = {};
+Object.keys(modulesData).forEach(function(mid){
+  filesData[mid] = {};
+  Object.keys(modulesData[mid].docs).forEach(function(did){filesData[mid][did] = [];});
+});
+
+// ============= RENDER MÓDULOS =============
+function renderModules(){
+  var grid = document.getElementById('modules-grid');
+  var icons = {'mod-1':'ri-shield-check-line','mod-2':'ri-booklet-line','mod-3':'ri-flask-line','mod-4':'ri-alarm-warning-line'};
+  grid.innerHTML = Object.keys(modulesData).map(function(mid){
+    var m = modulesData[mid];
+    var docKeys = Object.keys(m.docs);
+    return '<div class="module-card"><div class="module-icon"><i class="'+icons[mid]+'"></i></div><div class="module-card-header"><h3>'+m.label+'. '+m.title+'</h3><span class="arrow-icon"><i class="ri-arrow-right-line"></i></span></div><ul class="doc-list">'+docKeys.map(function(did){var d=m.docs[did];return '<li class="doc-item" onclick="openModule(\''+mid+'\')"><span class="doc-icon"><i class="'+d.icon+'"></i></span><span class="doc-text">'+d.name+'</span></li>'}).join('')+'</ul><div class="card-footer"><span class="doc-count">'+docKeys.length+' documentos</span><span class="ver-modulo" onclick="openModule(\''+mid+'\')">Ver módulo <i class="ri-arrow-right-s-line"></i></span></div></div>';
+  }).join('');
+}
+
+// ============= LOGIN ADMIN =============
+function openAdminLogin(){
+  if(isAdmin){logoutAdmin();return;}
+  var modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.id = 'admin-modal';
+  modal.innerHTML = '<div class="modal-content"><div class="modal-icon"><i class="ri-lock-unlock-line"></i></div><h3>Acceso Administrador</h3><p>Ingresa tus credenciales para gestionar documentos.</p><div class="modal-error" id="admin-error"></div><form onsubmit="validateAdmin(event)"><div class="input-wrap"><i class="ri-user-line"></i><input type="text" id="adm-user" placeholder="Usuario administrador" required autocomplete="username"></div><div class="input-wrap"><i class="ri-lock-line"></i><input type="password" id="adm-pass" placeholder="Contraseña" required autocomplete="current-password"></div><button type="submit" style="margin-top:14px">Ingresar como Administrador</button></form><button class="cancel" onclick="closeAdminModal()">Cancelar</button></div>';
+  modal.onclick = function(e){if(e.target===modal)closeAdminModal();};
+  document.body.appendChild(modal);
+  document.getElementById('adm-user').focus();
+}
+
+function validateAdmin(e){
+  e.preventDefault();
+  var user = document.getElementById('adm-user').value.trim().toLowerCase();
+  var pass = document.getElementById('adm-pass').value;
+  var err = document.getElementById('admin-error');
+  if(user === ADMIN_USER && pass === ADMIN_PASS){
+    isAdmin = true;
+    closeAdminModal();
+    applyAdminUI();
+    showToast('Modo Administrador activado');
+    if(!document.getElementById('view-module').classList.contains('d-none')){updateRoleUI();renderFiles();}
+  } else {
+    err.textContent = 'Credenciales incorrectas';
+    document.getElementById('adm-pass').value = '';
+    document.getElementById('adm-pass').focus();
+  }
+}
+
+function closeAdminModal(){var m=document.getElementById('admin-modal');if(m)m.remove();}
+
+function logoutAdmin(){
+  if(!confirm('¿Cerrar sesión de administrador?'))return;
+  isAdmin = false;
+  applyAdminUI();
+  if(!document.getElementById('view-module').classList.contains('d-none')){updateRoleUI();renderFiles();}
+  showToast('Sesión de administrador cerrada');
+}
+
+function applyAdminUI(){
+  var btn = document.getElementById('btn-admin-login');
+  var badge = document.getElementById('admin-badge');
+  if(isAdmin){
+    btn.innerHTML = '<i class="ri-shield-user-line"></i> Administrador';
+    btn.classList.add('active');
+    if(badge)badge.classList.remove('d-none');
+  } else {
+    btn.innerHTML = '<i class="ri-lock-line"></i> Administrar';
+    btn.classList.remove('active');
+    if(badge)badge.classList.add('d-none');
+  }
+}
+
+function updateRoleUI(){
+  var uploadZone = document.getElementById('upload-zone');
+  var notice = document.getElementById('access-notice');
+  if(isAdmin){
+    uploadZone.classList.remove('d-none');
+    notice.className = 'access-notice admin';
+    notice.innerHTML = '<i class="ri-shield-check-line"></i><strong>Modo Administrador:</strong> Puedes subir y eliminar archivos. Los usuarios públicos solo visualizarán.';
+  } else {
+    uploadZone.classList.add('d-none');
+    notice.className = 'access-notice public';
+    notice.innerHTML = '<i class="ri-eye-line"></i><strong>Modo Público:</strong> Todos los usuarios pueden visualizar los archivos. Si eres administrador, inicia sesión para gestionar.';
+  }
+}
+
+// ============= NAVEGACIÓN =============
+function showHome(){
+  document.getElementById('view-home').classList.remove('d-none');
+  document.getElementById('view-module').classList.add('d-none');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function scrollToFeatures(){document.getElementById('caracteristicas').scrollIntoView({behavior:'smooth'});}
+
+function openModule(modId){
+  currentModule = modId;
+  var mod = modulesData[modId];
+  document.getElementById('ui-mod-emoji').textContent = mod.emoji;
+  document.getElementById('ui-mod-label').textContent = mod.label;
+  document.getElementById('ui-mod-title').textContent = mod.title;
+  var sidebar = document.getElementById('sidebar-docs');
+  var docKeys = Object.keys(mod.docs);
+  sidebar.innerHTML = docKeys.map(function(did,i){
+    var d = mod.docs[did];
+    return '<div class="sidebar-doc'+(i===0?' active':'')+'" onclick="selectDoc(\''+did+'\',this)"><i class="'+d.icon+'"></i> '+d.name+'</div>';
+  }).join('');
+  document.getElementById('view-home').classList.add('d-none');
+  document.getElementById('view-module').classList.remove('d-none');
+  if(docKeys.length>0)selectDoc(docKeys[0], sidebar.querySelector('.sidebar-doc'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectDoc(docId, el){
+  currentDoc = docId;
+  document.querySelectorAll('.sidebar-doc').forEach(function(e){e.classList.remove('active')});
+  el.classList.add('active');
+  var doc = modulesData[currentModule].docs[docId];
+  document.getElementById('content-title').textContent = doc.name;
+  document.getElementById('content-desc').textContent = doc.desc;
+  updateRoleUI();
+  renderFiles();
+}
+
+// ============= ARCHIVOS =============
+function handleFileUpload(event){
+  var files = event.target.files;
+  if(!files||files.length===0)return;
+  for(var i=0;i<files.length;i++){
+    var file = files[i];
+    filesData[currentModule][currentDoc].push({id:Date.now()+Math.random(),name:file.name,size:formatFileSize(file.size),type:getFileType(file.name),date:new Date().toLocaleDateString('es-ES')});
+  }
+  renderFiles();updateStats();showToast('Archivo(s) subidos correctamente');event.target.value='';
+}
+
+function deleteFile(fileId){
+  if(!confirm('¿Eliminar este archivo?'))return;
+  filesData[currentModule][currentDoc] = filesData[currentModule][currentDoc].filter(function(f){return f.id!==fileId});
+  renderFiles();updateStats();showToast('Archivo eliminado','error');
+}
+
+function viewFile(fileName){showToast('Visualizando: '+fileName);}
+
+function renderFiles(){
+  var listEl = document.getElementById('files-list');
+  var files = filesData[currentModule][currentDoc]||[];
+  if(files.length===0){
+    listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
+    return;
+  }
+  listEl.innerHTML = files.map(function(f){
+    var delBtn = isAdmin?'<button class="btn-delete" onclick="deleteFile('+f.id+')" title="Eliminar"><i class="ri-delete-bin-line"></i></button>':'';
+    return '<div class="file-row"><div class="file-icon-box"><i class="'+f.type.icon+'"></i></div><div class="file-info"><div class="file-name">'+f.name+'</div><div class="file-meta">'+f.size+' · '+f.date+'</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+f.name.replace(/'/g,"\\'")+'\')"><i class="ri-eye-line"></i> Visualizar</button>'+delBtn+'</div></div>';
+  }).join('');
+}
+
+function formatFileSize(bytes){if(bytes<1024)return bytes+' B';if(bytes<1048576)return(bytes/1024).toFixed(1)+' KB';return(bytes/1048576).toFixed(1)+' MB';}
+function getFileType(filename){var ext=filename.split('.').pop().toLowerCase();if(['pdf'].indexOf(ext)>-1)return{icon:'ri-file-pdf-line'};if(['doc','docx'].indexOf(ext)>-1)return{icon:'ri-file-word-line'};if(['xls','xlsx'].indexOf(ext)>-1)return{icon:'ri-file-excel-line'};if(['png','jpg','jpeg','gif'].indexOf(ext)>-1)return{icon:'ri-file-image-line'};return{icon:'ri-file-line'};}
+function updateStats(){var total=0;Object.keys(filesData).forEach(function(mid){Object.keys(filesData[mid]).forEach(function(did){total+=filesData[mid][did].length;});});document.getElementById('stat-docs').textContent=total;}
+
+function showToast(msg,type){
+  var ex=document.querySelector('.toast');if(ex)ex.remove();
+  var t=document.createElement('div');t.className='toast'+(type==='error'?' error':'');
+  t.innerHTML='<i class="ri-check-line" style="margin-right:6px"></i>'+msg;
+  if(type==='error')t.innerHTML='<i class="ri-close-line" style="margin-right:6px"></i>'+msg;
+  document.body.appendChild(t);
+  setTimeout(function(){t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(function(){t.remove()},300)},2500);
+}
+
+// INICIAR
+renderModules();
+</script>
+</body>
+</html>},'mapa-riesgos':{name:'Mapa de Riesgos',icon:'ri-map-pin-line',desc:'Identificación georreferenciada de zonas de riesgo.'}}},
+  'mod-2': {title:'Estándares y Procedimientos',label:'Módulo 2',emoji:'📋',docs:{'estandares':{name:'Estándares de Seguridad',icon:'ri-file-list-3-line',desc:'Normativas y estándares mínimos de seguridad industrial.'},'pets':{name:'Procedimientos (PETS)',icon:'ri-file-list-3-line',desc:'Procedimientos Escritos de Trabajo Seguro.'},'petar':{name:'Permisos Alto Riesgo',icon:'ri-shield-keyhole-line',desc:'Permisos para trabajos de alto riesgo.'}}},
+  'mod-3': {title:'Control de Materiales Peligrosos',label:'Módulo 3',emoji:'🧪',docs:{'msds':{name:'Hojas MSDS / FDS',icon:'ri-chemical-glass-line',desc:'Fichas de Datos de Seguridad.'},'incompatibilidad':{name:'Matriz Incompatibilidad',icon:'ri-chemical-glass-line',desc:'Matriz de incompatibilidad de materiales.'}}},
+  'mod-4': {title:'Preparación ante Emergencias',label:'Módulo 4',emoji:'🚨',docs:{'plan':{name:'Plan de Respuesta',icon:'ri-siren-line',desc:'Procedimientos de respuesta ante emergencias.'},'directorio':{name:'Directorio Emergencias',icon:'ri-phone-line',desc:'Contactos y números de emergencia.'}}}
+};
+
+var currentModule = null, currentDoc = null;
+var filesData = {};
+Object.keys(modulesData).forEach(function(mid){
+  filesData[mid] = {};
+  Object.keys(modulesData[mid].docs).forEach(function(did){filesData[mid][did] = [];});
+});
+
+// ============= RENDER MÓDULOS =============
+function renderModules(){
+  var grid = document.getElementById('modules-grid');
+  var icons = {'mod-1':'ri-shield-check-line','mod-2':'ri-booklet-line','mod-3':'ri-flask-line','mod-4':'ri-alarm-warning-line'};
+  grid.innerHTML = Object.keys(modulesData).map(function(mid){
+    var m = modulesData[mid];
+    var docKeys = Object.keys(m.docs);
+    return '<div class="module-card"><div class="module-icon"><i class="'+icons[mid]+'"></i></div><div class="module-card-header"><h3>'+m.label+'. '+m.title+'</h3><span class="arrow-icon"><i class="ri-arrow-right-line"></i></span></div><ul class="doc-list">'+docKeys.map(function(did){var d=m.docs[did];return '<li class="doc-item" onclick="openModule(\''+mid+'\')"><span class="doc-icon"><i class="'+d.icon+'"></i></span><span class="doc-text">'+d.name+'</span></li>'}).join('')+'</ul><div class="card-footer"><span class="doc-count">'+docKeys.length+' documentos</span><span class="ver-modulo" onclick="openModule(\''+mid+'\')">Ver módulo <i class="ri-arrow-right-s-line"></i></span></div></div>';
+  }).join('');
+}
+
+// ============= LOGIN ADMIN =============
+function openAdminLogin(){
+  if(isAdmin){logoutAdmin();return;}
+  var modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.id = 'admin-modal';
+  modal.innerHTML = '<div class="modal-content"><div class="modal-icon"><i class="ri-lock-unlock-line"></i></div><h3>Acceso Administrador</h3><p>Ingresa tus credenciales para gestionar documentos.</p><div class="modal-error" id="admin-error"></div><form onsubmit="validateAdmin(event)"><div class="input-wrap"><i class="ri-user-line"></i><input type="text" id="adm-user" placeholder="Usuario administrador" required autocomplete="username"></div><div class="input-wrap"><i class="ri-lock-line"></i><input type="password" id="adm-pass" placeholder="Contraseña" required autocomplete="current-password"></div><button type="submit" style="margin-top:14px">Ingresar como Administrador</button></form><button class="cancel" onclick="closeAdminModal()">Cancelar</button></div>';
+  modal.onclick = function(e){if(e.target===modal)closeAdminModal();};
+  document.body.appendChild(modal);
+  document.getElementById('adm-user').focus();
+}
+
+function validateAdmin(e){
+  e.preventDefault();
+  var user = document.getElementById('adm-user').value.trim().toLowerCase();
+  var pass = document.getElementById('adm-pass').value;
+  var err = document.getElementById('admin-error');
+  if(user === ADMIN_USER && pass === ADMIN_PASS){
+    isAdmin = true;
+    closeAdminModal();
+    applyAdminUI();
+    showToast('Modo Administrador activado');
+    if(!document.getElementById('view-module').classList.contains('d-none')){updateRoleUI();renderFiles();}
+  } else {
+    err.textContent = 'Credenciales incorrectas';
+    document.getElementById('adm-pass').value = '';
+    document.getElementById('adm-pass').focus();
+  }
+}
+
+function closeAdminModal(){var m=document.getElementById('admin-modal');if(m)m.remove();}
+
+function logoutAdmin(){
+  if(!confirm('¿Cerrar sesión de administrador?'))return;
+  isAdmin = false;
+  applyAdminUI();
+  if(!document.getElementById('view-module').classList.contains('d-none')){updateRoleUI();renderFiles();}
+  showToast('Sesión de administrador cerrada');
+}
+
+function applyAdminUI(){
+  var btn = document.getElementById('btn-admin-login');
+  var badge = document.getElementById('admin-badge');
+  if(isAdmin){
+    btn.innerHTML = '<i class="ri-shield-user-line"></i> Administrador';
+    btn.classList.add('active');
+    if(badge)badge.classList.remove('d-none');
+  } else {
+    btn.innerHTML = '<i class="ri-lock-line"></i> Administrar';
+    btn.classList.remove('active');
+    if(badge)badge.classList.add('d-none');
+  }
+}
+
+function updateRoleUI(){
+  var uploadZone = document.getElementById('upload-zone');
+  var notice = document.getElementById('access-notice');
+  if(isAdmin){
+    uploadZone.classList.remove('d-none');
+    notice.className = 'access-notice admin';
+    notice.innerHTML = '<i class="ri-shield-check-line"></i><strong>Modo Administrador:</strong> Puedes subir y eliminar archivos. Los usuarios públicos solo visualizarán.';
+  } else {
+    uploadZone.classList.add('d-none');
+    notice.className = 'access-notice public';
+    notice.innerHTML = '<i class="ri-eye-line"></i><strong>Modo Público:</strong> Todos los usuarios pueden visualizar los archivos. Si eres administrador, inicia sesión para gestionar.';
+  }
+}
+
+// ============= NAVEGACIÓN =============
+function showHome(){
+  document.getElementById('view-home').classList.remove('d-none');
+  document.getElementById('view-module').classList.add('d-none');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function scrollToFeatures(){document.getElementById('caracteristicas').scrollIntoView({behavior:'smooth'});}
+
+function openModule(modId){
+  currentModule = modId;
+  var mod = modulesData[modId];
+  document.getElementById('ui-mod-emoji').textContent = mod.emoji;
+  document.getElementById('ui-mod-label').textContent = mod.label;
+  document.getElementById('ui-mod-title').textContent = mod.title;
+  var sidebar = document.getElementById('sidebar-docs');
+  var docKeys = Object.keys(mod.docs);
+  sidebar.innerHTML = docKeys.map(function(did,i){
+    var d = mod.docs[did];
+    return '<div class="sidebar-doc'+(i===0?' active':'')+'" onclick="selectDoc(\''+did+'\',this)"><i class="'+d.icon+'"></i> '+d.name+'</div>';
+  }).join('');
+  document.getElementById('view-home').classList.add('d-none');
+  document.getElementById('view-module').classList.remove('d-none');
+  if(docKeys.length>0)selectDoc(docKeys[0], sidebar.querySelector('.sidebar-doc'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectDoc(docId, el){
+  currentDoc = docId;
+  document.querySelectorAll('.sidebar-doc').forEach(function(e){e.classList.remove('active')});
+  el.classList.add('active');
+  var doc = modulesData[currentModule].docs[docId];
+  document.getElementById('content-title').textContent = doc.name;
+  document.getElementById('content-desc').textContent = doc.desc;
+  updateRoleUI();
+  renderFiles();
+}
+
+// ============= ARCHIVOS =============
+function handleFileUpload(event){
+  var files = event.target.files;
+  if(!files||files.length===0)return;
+  for(var i=0;i<files.length;i++){
+    var file = files[i];
+    filesData[currentModule][currentDoc].push({id:Date.now()+Math.random(),name:file.name,size:formatFileSize(file.size),type:getFileType(file.name),date:new Date().toLocaleDateString('es-ES')});
+  }
+  renderFiles();updateStats();showToast('Archivo(s) subidos correctamente');event.target.value='';
+}
+
+function deleteFile(fileId){
+  if(!confirm('¿Eliminar este archivo?'))return;
+  filesData[currentModule][currentDoc] = filesData[currentModule][currentDoc].filter(function(f){return f.id!==fileId});
+  renderFiles();updateStats();showToast('Archivo eliminado','error');
+}
+
+function viewFile(fileName){showToast('Visualizando: '+fileName);}
+
+function renderFiles(){
+  var listEl = document.getElementById('files-list');
+  var files = filesData[currentModule][currentDoc]||[];
+  if(files.length===0){
+    listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
+    return;
+  }
+  listEl.innerHTML = files.map(function(f){
+    var delBtn = isAdmin?'<button class="btn-delete" onclick="deleteFile('+f.id+')" title="Eliminar"><i class="ri-delete-bin-line"></i></button>':'';
+    return '<div class="file-row"><div class="file-icon-box"><i class="'+f.type.icon+'"></i></div><div class="file-info"><div class="file-name">'+f.name+'</div><div class="file-meta">'+f.size+' · '+f.date+'</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+f.name.replace(/'/g,"\\'")+'\')"><i class="ri-eye-line"></i> Visualizar</button>'+delBtn+'</div></div>';
+  }).join('');
+}
+
+function formatFileSize(bytes){if(bytes<1024)return bytes+' B';if(bytes<1048576)return(bytes/1024).toFixed(1)+' KB';return(bytes/1048576).toFixed(1)+' MB';}
+function getFileType(filename){var ext=filename.split('.').pop().toLowerCase();if(['pdf'].indexOf(ext)>-1)return{icon:'ri-file-pdf-line'};if(['doc','docx'].indexOf(ext)>-1)return{icon:'ri-file-word-line'};if(['xls','xlsx'].indexOf(ext)>-1)return{icon:'ri-file-excel-line'};if(['png','jpg','jpeg','gif'].indexOf(ext)>-1)return{icon:'ri-file-image-line'};return{icon:'ri-file-line'};}
+function updateStats(){var total=0;Object.keys(filesData).forEach(function(mid){Object.keys(filesData[mid]).forEach(function(did){total+=filesData[mid][did].length;});});document.getElementById('stat-docs').textContent=total;}
+
+function showToast(msg,type){
+  var ex=document.querySelector('.toast');if(ex)ex.remove();
+  var t=document.createElement('div');t.className='toast'+(type==='error'?' error':'');
+  t.innerHTML='<i class="ri-check-line" style="margin-right:6px"></i>'+msg;
+  if(type==='error')t.innerHTML='<i class="ri-close-line" style="margin-right:6px"></i>'+msg;
+  document.body.appendChild(t);
+  setTimeout(function(){t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(function(){t.remove()},300)},2500);
+}
+
+// INICIAR
+renderModules();
+</script>
+</body>
+</html>},'mapa-riesgos':{name:'Mapa de Riesgos',icon:'ri-map-pin-line',desc:'Identificación georreferenciada de zonas de riesgo.'}}},
   'mod-2': {title:'Estándares y Procedimientos',label:'Módulo 2',emoji:'📋',docs:{'estandares':{name:'Estándares de Seguridad',icon:'ri-file-list-3-line',desc:'Normativas y estándares mínimos de seguridad industrial.'},'pets':{name:'Procedimientos (PETS)',icon:'ri-file-list-3-line',desc:'Procedimientos Escritos de Trabajo Seguro.'},'petar':{name:'Permisos Alto Riesgo',icon:'ri-shield-keyhole-line',desc:'Permisos para trabajos de alto riesgo.'}}},
   'mod-3': {title:'Control de Materiales Peligrosos',label:'Módulo 3',emoji:'🧪',docs:{'msds':{name:'Hojas MSDS / FDS',icon:'ri-chemical-glass-line',desc:'Fichas de Datos de Seguridad.'},'incompatibilidad':{name:'Matriz Incompatibilidad',icon:'ri-chemical-glass-line',desc:'Matriz de incompatibilidad de materiales.'}}},
   'mod-4': {title:'Preparación ante Emergencias',label:'Módulo 4',emoji:'🚨',docs:{'plan':{name:'Plan de Respuesta',icon:'ri-siren-line',desc:'Procedimientos de respuesta ante emergencias.'},'directorio':{name:'Directorio Emergencias',icon:'ri-phone-line',desc:'Contactos y números de emergencia.'}}}
