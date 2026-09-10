@@ -493,13 +493,18 @@ function deleteFile(fileId){
   renderFiles();updateStats();showToast('Archivo eliminado','error');
 }
 
-function viewFile(fileName){
+function downloadFile(fileName){
   var doc = modulesData[currentModule].docs[currentDoc];
   if(doc.url){
-    // Abrir en MISMA pestaña
-    window.open(doc.url, '_self');
+    var link = document.createElement('a');
+    link.href = doc.url;
+    link.download = fileName + '.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Descargando: ' + fileName);
   }else{
-    showToast('Enlace no disponible: '+fileName);
+    showToast('Enlace no disponible: ' + fileName);
   }
 }
 
@@ -509,7 +514,7 @@ function renderFiles(){
   if(files.length===0){
   var doc = modulesData[currentModule].docs[currentDoc];
   if(doc && doc.url){
-    listEl.innerHTML = '<div class="file-row"><div class="file-icon-box"><i class="ri-file-pdf-line"></i></div><div class="file-info"><div class="file-name">'+doc.name+'.pdf</div><div class="file-meta">PDF · Documento enlazado</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+doc.name+'\')"><i class="ri-eye-line"></i> Visualizar</button></div></div>';
+    listEl.innerHTML = '<div class="file-row"><div class="file-icon-box"><i class="ri-file-pdf-line"></i></div><div class="file-info"><div class="file-name">'+doc.name+'.pdf</div><div class="file-meta">PDF · Documento enlazado</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+doc.name+'\')"><i class="ri-eye-line"></i> Ver</button><button class="btn-view" onclick="downloadFile(\''+doc.name+'\')"><i class="ri-download-line"></i> Descargar</button></div></div>';
   }else{
     listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
   }
