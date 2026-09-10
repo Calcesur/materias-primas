@@ -509,6 +509,11 @@ function renderFiles(){
     listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
     return;
   }
+  listEl.innerHTML = files.map(function(f){
+    var delBtn = isAdmin?'<button class="btn-delete" onclick="deleteFile('+f.id+')" title="Eliminar"><i class="ri-delete-bin-line"></i></button>':'';
+    return '<div class="file-row"><div class="file-icon-box"><i class="'+f.type.icon+'"></i></div><div class="file-info"><div class="file-name">'+f.name+'</div><div class="file-meta">'+f.size+' · '+f.date+'</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+f.name.replace(/'/g,"\\'")+'\')"><i class="ri-eye-line"></i> Visualizar</button>'+delBtn+'</div></div>';
+  }).join('');
+}
 
 function formatFileSize(bytes){if(bytes<1024)return bytes+' B';if(bytes<1048576)return(bytes/1024).toFixed(1)+' KB';return(bytes/1048576).toFixed(1)+' MB';}
 function getFileType(filename){var ext=filename.split('.').pop().toLowerCase();if(['pdf'].indexOf(ext)>-1)return{icon:'ri-file-pdf-line'};if(['doc','docx'].indexOf(ext)>-1)return{icon:'ri-file-word-line'};if(['xls','xlsx'].indexOf(ext)>-1)return{icon:'ri-file-excel-line'};if(['png','jpg','jpeg','gif'].indexOf(ext)>-1)return{icon:'ri-file-image-line'};return{icon:'ri-file-line'};}
