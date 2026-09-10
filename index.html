@@ -496,7 +496,9 @@ function deleteFile(fileId){
 function viewFile(fileName){
   var doc = modulesData[currentModule].docs[currentDoc];
   if(doc.url){
+    // Abre el PDF en pestaña nueva para visualizarlo
     window.open(doc.url, '_blank');
+    showToast('Abriendo vista previa en pestaña nueva...');
   }else{
     showToast('Enlace no disponible: ' + fileName);
   }
