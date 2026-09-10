@@ -294,10 +294,62 @@ var ADMIN_PASS = 'calcesur2026';
 var isAdmin = false;
 
 var modulesData = {
-  'mod-1': {title:'Gestión de Riesgos y Evaluación',label:'Módulo 1',emoji:'⚠️',docs:{'iperc-linea':{name:'IPERC Línea Base',icon:'ri-file-text-line',desc:'Identificación de peligros y evaluación de riesgos de línea base.'},'iperc-continuo':{name:'IPERC Continuo',icon:'ri-file-text-line',desc:'Evaluación de riesgos continua antes de cada actividad.'},'matriz-eia':{name:'Matriz EIA',icon:'ri-file-text-line',desc:'Matriz de Evaluación de Impacto Ambiental.'},'mapa-riesgos':{name:'Mapa de Riesgos',icon:'ri-map-pin-line',desc:'Identificación georreferenciada de zonas de riesgo.'}}},
-  'mod-2': {title:'Estándares y Procedimientos',label:'Módulo 2',emoji:'📋',docs:{'estandares':{name:'Estándares de Seguridad',icon:'ri-file-list-3-line',desc:'Normativas y estándares mínimos de seguridad industrial.'},'pets':{name:'Procedimientos (PETS)',icon:'ri-file-list-3-line',desc:'Procedimientos Escritos de Trabajo Seguro.'},'petar':{name:'Permisos Alto Riesgo',icon:'ri-shield-keyhole-line',desc:'Permisos para trabajos de alto riesgo.'}}},
-  'mod-3': {title:'Control de Materiales Peligrosos',label:'Módulo 3',emoji:'🧪',docs:{'msds':{name:'Hojas MSDS / FDS',icon:'ri-chemical-glass-line',desc:'Fichas de Datos de Seguridad.'},'incompatibilidad':{name:'Matriz Incompatibilidad',icon:'ri-chemical-glass-line',desc:'Matriz de incompatibilidad de materiales.'}}},
-  'mod-4': {title:'Preparación ante Emergencias',label:'Módulo 4',emoji:'🚨',docs:{'plan':{name:'Plan de Respuesta',icon:'ri-siren-line',desc:'Procedimientos de respuesta ante emergencias.'},'directorio':{name:'Directorio Emergencias',icon:'ri-phone-line',desc:'Contactos y números de emergencia.'}}}
+  'mod-1': {
+    title:'Gestión de Riesgos y Evaluación',
+    label:'Módulo 1',
+    emoji:'⚠️',
+    docs:{
+      'iperc-linea':{
+        name:'IPERC Línea Base',
+        icon:'ri-file-text-line',
+        desc:'Identificación de peligros y evaluación de riesgos de línea base.',
+        url:'https://raw.githubusercontent.com/Calcesur/materias-primas/main/documentos/Matriz_IPERC_Supervision%202026%20May.pdf'
+      },
+      'iperc-continuo':{
+        name:'IPERC Continuo',
+        icon:'ri-file-text-line',
+        desc:'Evaluación de riesgos continua antes de cada actividad.'
+      },
+      'matriz-eia':{
+        name:'Matriz EIA',
+        icon:'ri-file-text-line',
+        desc:'Matriz de Evaluación de Impacto Ambiental.'
+      },
+      'mapa-riesgos':{
+        name:'Mapa de Riesgos',
+        icon:'ri-map-pin-line',
+        desc:'Identificación georreferenciada de zonas de riesgo.'
+      }
+    }
+  },
+  'mod-2': {
+    title:'Estándares y Procedimientos',
+    label:'Módulo 2',
+    emoji:'📋',
+    docs:{
+      'estandares':{name:'Estándares de Seguridad',icon:'ri-file-list-3-line',desc:'Normativas y estándares mínimos de seguridad industrial.'},
+      'pets':{name:'Procedimientos (PETS)',icon:'ri-file-list-3-line',desc:'Procedimientos Escritos de Trabajo Seguro.'},
+      'petar':{name:'Permisos Alto Riesgo',icon:'ri-shield-keyhole-line',desc:'Permisos para trabajos de alto riesgo.'}
+    }
+  },
+  'mod-3': {
+    title:'Control de Materiales Peligrosos',
+    label:'Módulo 3',
+    emoji:'🧪',
+    docs:{
+      'msds':{name:'Hojas MSDS / FDS',icon:'ri-chemical-glass-line',desc:'Fichas de Datos de Seguridad.'},
+      'incompatibilidad':{name:'Matriz Incompatibilidad',icon:'ri-chemical-glass-line',desc:'Matriz de incompatibilidad de materiales.'}
+    }
+  },
+  'mod-4': {
+    title:'Preparación ante Emergencias',
+    label:'Módulo 4',
+    emoji:'🚨',
+    docs:{
+      'plan':{name:'Plan de Respuesta',icon:'ri-siren-line',desc:'Procedimientos de respuesta ante emergencias.'},
+      'directorio':{name:'Directorio Emergencias',icon:'ri-phone-line',desc:'Contactos y números de emergencia.'}
+    }
+  }
 };
 
 var currentModule = null, currentDoc = null;
