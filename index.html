@@ -493,7 +493,14 @@ function deleteFile(fileId){
   renderFiles();updateStats();showToast('Archivo eliminado','error');
 }
 
-function viewFile(fileName){showToast('Visualizando: '+fileName);}
+function viewFile(fileName){
+  var doc = modulesData[currentModule].docs[currentDoc];
+  if(doc.url){
+    window.open(doc.url, '_blank');
+  }else{
+    showToast('Enlace no disponible: '+fileName);
+  }
+}
 
 function renderFiles(){
   var listEl = document.getElementById('files-list');
