@@ -505,15 +505,8 @@ function viewFile(fileName){
 function renderFiles(){
   var listEl = document.getElementById('files-list');
   var files = filesData[currentModule][currentDoc]||[];
-  var doc = modulesData[currentModule].docs[currentDoc];
-  
-  // Si no hay archivos subidos PERO hay un enlace URL, mostramos el PDF
   if(files.length===0){
-    if(doc && doc.url){
-      listEl.innerHTML = '<div class="file-row"><div class="file-icon-box"><i class="ri-file-pdf-line"></i></div><div class="file-info"><div class="file-name">'+doc.name+'.pdf</div><div class="file-meta">PDF · Documento enlazado</div></div><div class="file-actions"><button class="btn-view" onclick="viewFile(\''+doc.name+'\')"><i class="ri-eye-line"></i> Visualizar</button></div></div>';
-    }else{
-      listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
-    }
+    listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:.875rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)"><div style="font-size:2.5rem;margin-bottom:10px;opacity:.4"><i class="ri-folder-line"></i></div>No hay archivos cargados.'+(isAdmin?'<br><small style="color:var(--green)">Como administrador puedes subir el primer archivo arriba.</small>':'')+'</div>';
     return;
   }
 
