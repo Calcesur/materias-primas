@@ -496,7 +496,8 @@ function deleteFile(fileId){
 function viewFile(fileName){
   var doc = modulesData[currentModule].docs[currentDoc];
   if(doc.url){
-    window.open(doc.url, '_blank');
+    // Abrir en MISMA pestaña
+    window.open(doc.url, '_self');
   }else{
     showToast('Enlace no disponible: '+fileName);
   }
